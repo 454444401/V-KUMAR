@@ -1,0 +1,243 @@
+/* Basic styling for Electric Scooter Plugin public forms */
+
+#electric-scooter-registration-form .required,
+#electric-scooter-login-form .required,
+#electric-scooter-profile-form .required {
+    color: red;
+}
+
+#electric-scooter-registration-form p,
+#electric-scooter-login-form p,
+#electric-scooter-profile-form p {
+    margin-bottom: 15px;
+}
+
+#electric-scooter-registration-form label,
+#electric-scooter-login-form label,
+#electric-scooter-profile-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#electric-scooter-registration-form input[type="text"],
+#electric-scooter-registration-form input[type="email"],
+#electric-scooter-registration-form input[type="password"],
+#electric-scooter-login-form input[type="text"],
+#electric-scooter-login-form input[type="email"],
+#electric-scooter-login-form input[type="password"],
+#electric-scooter-profile-form input[type="text"],
+#electric-scooter-profile-form input[type="email"],
+#electric-scooter-profile-form input[type="tel"],
+#electric-scooter-profile-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#electric-scooter-registration-form input[type="submit"],
+#electric-scooter-login-form input[type="submit"],
+#electric-scooter-profile-form input[type="submit"] {
+    background-color: #0073aa; /* WordPress blue */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#electric-scooter-registration-form input[type="submit"]:hover,
+#electric-scooter-login-form input[type="submit"]:hover,
+#electric-scooter-profile-form input[type="submit"]:hover {
+    background-color: #005177;
+}
+
+/* Error and success messages */
+.error {
+    border: 1px solid red;
+    color: red;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #ffe0e0;
+}
+
+.success {
+    border: 1px solid green;
+    color: green;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #e0ffe0;
+}
+
+/* Profile specific */
+#electric-scooter-profile-form .profile-section {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+}
+
+#electric-scooter-profile-form .profile-section:last-child {
+    border-bottom: none;
+}
+
+#electric-scooter-profile-form .kyc-status {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+#electric-scooter-profile-form .kyc-status.pending {
+    background-color: #fff3cd; /* Light yellow */
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+#electric-scooter-profile-form .kyc-status.approved {
+    background-color: #d4edda; /* Light green */
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+#electric-scooter-profile-form .kyc-status.rejected {
+    background-color: #f8d7da; /* Light red */
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+/* Binary Tree Styling */
+.electric-scooter-binary-tree {
+    margin: 20px 0;
+    overflow-x: auto; /* Allow horizontal scrolling for large trees */
+    padding: 10px;
+    text-align: center; /* Center the root node */
+}
+
+.tree-node {
+    display: inline-block; /* Arrange children horizontally */
+    position: relative;
+    padding: 20px 5px 0 5px;
+    vertical-align: top;
+}
+
+.tree-node .node-content {
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 5px;
+    min-width: 150px; /* Minimum width of a node */
+    display: inline-block; /* Ensure it fits content */
+    background-color: #f9f9f9;
+    text-align: left; /* Align text inside node to the left */
+}
+
+.tree-node .node-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #0073aa;
+}
+
+.tree-node .node-details {
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.tree-node .pending-placement-notice {
+    color: #ff8c00; /* DarkOrange */
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+
+/* Lines - Basic CSS lines, more complex trees might need SVG/Canvas or pseudo-elements */
+.tree-node .node-children {
+    display: flex; /* Use flexbox for children alignment */
+    justify-content: center; /* Center children */
+    padding-top: 20px; /* Space for the line from parent */
+    position: relative;
+}
+
+/* Vertical line from parent to children connector */
+.tree-node > .node-content::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; /* Adjust to connect to children's horizontal line */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px; /* Length of the vertical line */
+    background-color: #ccc;
+}
+
+/* Hide the downward connector for nodes that have no children displayed or are empty */
+.tree-node:not(:has(>.node-children>.tree-node:not(.empty-node))) > .node-content::after,
+.tree-node.empty-node > .node-content::after {
+    display: none;
+}
+.tree-node:has(>.node-children-limit-reached) > .node-content::after {
+     display: none; /* Also hide if max level is reached */
+}
+
+
+/* Horizontal line connecting children */
+.tree-node .node-children::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0; /* Default, will be adjusted by children */
+    height: 2px;
+    background-color: #ccc;
+}
+
+/* Adjust horizontal line based on children presence */
+.tree-node .left-child:not(.empty-node) ~ .right-child:not(.empty-node) {
+    /* If both children exist, the line comes from the middle of the space between them */
+}
+
+.tree-node .left-child:not(.empty-node):first-child:last-child ~ .node-children::before, /* Only left child */
+.tree-node .right-child:not(.empty-node):first-child:last-child ~ .node-children::before { /* Only right child */
+   /* Special handling if only one child to draw line to it - this is tricky with pure CSS */
+   /* Current CSS draws lines from parent to child directly */
+}
+
+/* Line from child to the horizontal connector */
+.tree-node .left-child::before,
+.tree-node .right-child::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Start from above the child node */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px; /* Height of the line connecting child to horizontal line */
+    background-color: #ccc;
+}
+
+/* Hide line for empty nodes */
+.tree-node.empty-node::before {
+    display:none;
+}
+
+/* Specific adjustments for left/right children to connect to the horizontal line */
+/* This part is complex with pure CSS and often requires JS or more advanced CSS like Grid/Flexbox for lines */
+/* The current implementation uses direct parent-to-child connectors via ::after on parent and ::before on child */
+
+.tree-node .node-children-limit-reached {
+    font-size: 0.8em;
+    color: #aaa;
+    padding: 5px;
+}
+
+/* Responsive considerations for very wide trees */
+@media (max-width: 768px) {
+    .electric-scooter-binary-tree {
+        /* On smaller screens, ensure horizontal scroll is definitely working */
+    }
+    .tree-node .node-content {
+        min-width: 120px;
+    }
+}
+
+.notice.notice-warning { /* Style for admin notice if user is pending */
+    padding: 10px;
+    background-color: #fff8e5;
+    border-left: 4px solid #ffb900;
+    margin-bottom: 15px;
+}
